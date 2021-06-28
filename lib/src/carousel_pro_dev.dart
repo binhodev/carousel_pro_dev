@@ -14,7 +14,7 @@ enum DotPosition {
 
 class CarouselProDev extends StatefulWidget {
   //All the images on this Carousel.
-  final List? images;
+  late final List images;
 
   //All the images on this Carousel.
   final defaultImage;
@@ -95,7 +95,7 @@ class CarouselProDev extends StatefulWidget {
   final void Function(int, int)? onImageChange;
 
   CarouselProDev({
-    this.images,
+    required this.images,
     this.animationCurve = Curves.ease,
     this.animationDuration = const Duration(milliseconds: 300),
     this.dotSize = 8.0,
@@ -137,11 +137,11 @@ class CarouselProDevState extends State<CarouselProDev> {
   void initState() {
     super.initState();
 
-    if (widget.images != null && widget.images!.isNotEmpty) {
+    if (widget.images != null && widget.images.isNotEmpty) {
       if (widget.autoplay == true) {
         timer = Timer.periodic(widget.autoplayDuration!, (_) {
           if (_controller.hasClients) {
-            if (_controller.page!.round() == widget.images!.length - 1) {
+            if (_controller.page!.round() == widget.images.length - 1) {
               _controller.animateToPage(
                 0,
                 duration: widget.animationDuration!,
@@ -170,8 +170,8 @@ class CarouselProDevState extends State<CarouselProDev> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> listImages = (widget.images != null &&
-            widget.images!.isNotEmpty)
-        ? widget.images!.map<Widget>(
+            widget.images.isNotEmpty)
+        ? widget.images.map<Widget>(
             (netImage) {
               if (netImage is ImageProvider) {
                 return Container(
